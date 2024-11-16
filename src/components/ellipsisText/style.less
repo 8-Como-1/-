@@ -1,0 +1,30 @@
+.ellipsis-text {
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  display: -webkit-box;
+
+  -webkit-box-orient: vertical;
+
+  -webkit-line-clamp: 1;
+
+  line-clamp: 1;
+
+  word-break: break-all;
+}
+
+.ellipsis-wrapper {
+  position: relative;
+}
+
+.ellipsis-none {
+  position: absolute;
+  // 用top: 99999;会导致拖拽页面死机
+  opacity: 0;
+  z-index: -1;
+  -webkit-user-drag: none;
+  user-select: none;
+  overflow: auto;
+  word-break: break-all;
+}

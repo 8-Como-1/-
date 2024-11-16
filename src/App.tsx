@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Suspense, useEffect } from 'react';
+import AppHeader from './components/app-header';
+import AppFooter from './components/app-footer';
+import MyRoutes from '@/router';
+import AppPlayerBar from './views/player/app-player-bar';
+import { useAppDispatch } from './store';
+import { fetchCurrentSongAction } from '@/views/player/store';
+import LoginModal from '@/views/login';
+import { CustomScrollbar } from '@/components/customScrollbar';
 
-function App() {
+const App = () => {
+  const display = useAppDispatch();
+  useEffect(() => {
+    display(fetchCurrentSongAction(2116533072));
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <LoginModal/>
+      <AppHeader />
+      {/* <CustomScrollbar> */}
+      <Suspense fallback="">
+        <MyRoutes />
+      </Suspense>
+      <AppFooter />
+      {/* </CustomScrollbar> */}
+      <AppPlayerBar />
+    </>
   );
-}
+};
 
 export default App;
